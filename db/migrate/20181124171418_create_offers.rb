@@ -4,7 +4,7 @@ class CreateOffers < ActiveRecord::Migration[5.0]
       t.string :name
       t.datetime :start
       t.datetime :end
-      t.integer :product_quantity
+      t.string :product_quantity
       t.string :description
       t.references :content_manager, foreign_key: true, optional: false
 

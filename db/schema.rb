@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 20181124203718) do
     t.string   "name"
     t.datetime "start"
     t.datetime "end"
-    t.integer  "product_quantity"
+    t.string   "product_quantity"
     t.string   "description"
     t.integer  "content_manager_id"
     t.datetime "created_at",         null: false
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 20181124203718) do
     t.integer  "stock"
     t.string   "meassure_type"
     t.decimal  "weight"
+    t.string   "weight_unit"
     t.string   "description"
     t.integer  "content_manager_id"
     t.datetime "created_at",         null: false

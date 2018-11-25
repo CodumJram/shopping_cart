@@ -33,7 +33,10 @@ Rails.application.routes.draw do
   
   resources :content_managers do
     resources :products
+    resources :offers
   end
 
   resources :products
+  resources :offers
+
 end
