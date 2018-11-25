@@ -3,7 +3,7 @@ class CreateProducts < ActiveRecord::Migration[5.0]
     create_table :products, id: false, primary_key: :sku do |t|
       t.string :sku, null: false
       t.string :name
-      t.string :type
+      t.string :category
       t.decimal :price
       t.string :brand
       t.integer :stock
