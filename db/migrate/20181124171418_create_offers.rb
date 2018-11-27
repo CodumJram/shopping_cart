@@ -6,9 +6,9 @@ class CreateOffers < ActiveRecord::Migration[5.0]
       t.datetime :end
       t.string :product_quantity
       t.string :description
-      t.references :content_manager, foreign_key: true, optional: false
-      t.references :product, foreign_key: true, optional: true
-      t.references :offer, foreign_key: true, optional: true
+      t.references :content_managers, foreign_key: true, optional: false
+      t.references :products, foreign_key: true, optional: true
+      t.references :shopping_carts, foreign_key: true, optional: true
 
       t.timestamps
     end

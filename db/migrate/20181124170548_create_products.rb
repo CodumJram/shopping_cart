@@ -11,7 +11,7 @@ class CreateProducts < ActiveRecord::Migration[5.0]
       t.decimal :weight
       t.string :weight_unit
       t.string :description
-      t.references :content_manager, foreign_key: true
+      t.references :content_managers, foreign_key: true
 
       t.timestamps
     end
