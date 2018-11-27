@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181124203718) do
+ActiveRecord::Schema.define(version: 20181124203100) do
 
   create_table "content_managers", force: :cascade do |t|
     t.string   "first_name"
@@ -25,40 +25,28 @@ ActiveRecord::Schema.define(version: 20181124203718) do
   create_table "offer_get_products", force: :cascade do |t|
     t.integer  "free_quantity"
     t.integer  "product_id"
+    t.integer  "offers_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.index ["offers_id"], name: "index_offer_get_products_on_offers_id"
     t.index ["product_id"], name: "index_offer_get_products_on_product_id"
-  end
-
-  create_table "offer_get_products_offers", id: false, force: :cascade do |t|
-    t.integer "offer_id",             null: false
-    t.integer "offer_get_product_id", null: false
-    t.index ["offer_id", "offer_get_product_id"], name: "offer_on_offer_get_products_id"
   end
 
   create_table "offer_totals", force: :cascade do |t|
     t.decimal  "percentage_discount"
+    t.integer  "offers_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
-  end
-
-  create_table "offer_totals_offers", id: false, force: :cascade do |t|
-    t.integer "offer_id",       null: false
-    t.integer "offer_total_id", null: false
-    t.index ["offer_id", "offer_total_id"], name: "offer_on_offer_total_id"
+    t.index ["offers_id"], name: "index_offer_totals_on_offers_id"
   end
 
   create_table "offer_units_prices", force: :cascade do |t|
     t.integer  "needed_amount"
     t.decimal  "fixed_price"
+    t.integer  "offers_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-  end
-
-  create_table "offer_units_prices_offers", id: false, force: :cascade do |t|
-    t.integer "offer_id",             null: false
-    t.integer "offer_units_price_id", null: false
-    t.index ["offer_id", "offer_units_price_id"], name: "offer_on_offer_units_price_id"
+    t.index ["offers_id"], name: "index_offer_units_prices_on_offers_id"
   end
 
   create_table "offers", force: :cascade do |t|

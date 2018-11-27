@@ -32,11 +32,17 @@ Rails.application.routes.draw do
   root 'home#index'
   
   resources :content_managers do
-    resources :products
-    resources :offers
+    resources :products do
+      resources :offers do
+        resources :offer_get_products
+        resources :offer_units_prices
+        resources :offer_totals
+      end
+    end
   end
 
-  resources :products
-  resources :offers
+  resources :products do
+    resources :offers
+  end
 
 end
