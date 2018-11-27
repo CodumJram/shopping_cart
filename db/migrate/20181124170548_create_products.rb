@@ -9,6 +9,7 @@ class CreateProducts < ActiveRecord::Migration[5.0]
       t.integer :stock
       t.string :meassure_type
       t.decimal :weight
+      t.string :weight_unit
       t.string :description
       t.references :content_manager, foreign_key: true
 

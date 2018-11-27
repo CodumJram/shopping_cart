@@ -17,4 +17,8 @@ class Offer < ApplicationRecord
   belongs_to :content_managers
   belongs_to :products
   belongs_to :shopping_carts
+  
+  has_many :offer_get_products
+  has_many :offer_totals
+  has_many :offer_units_prices
 end
