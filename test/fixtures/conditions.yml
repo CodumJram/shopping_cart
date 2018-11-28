@@ -1,0 +1,23 @@
+# == Schema Information
+#
+# Table name: conditions
+#
+#  id                 :integer          not null, primary key
+#  needed_stock       :integer
+#  needed_money_spent :decimal(, )
+#  offer_id           :integer
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  needed_stock: 1
+  needed_money_spent: 9.99
+  offer: one
+
+two:
+  needed_stock: 1
+  needed_money_spent: 9.99
+  offer: two

@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181124202809) do
+ActiveRecord::Schema.define(version: 20181128035533) do
+
+  create_table "conditions", force: :cascade do |t|
+    t.integer  "needed_stock"
+    t.decimal  "needed_money_spent"
+    t.integer  "offer_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["offer_id"], name: "index_conditions_on_offer_id"
+  end
 
   create_table "content_managers", force: :cascade do |t|
     t.string   "first_name"
@@ -41,11 +50,10 @@ ActiveRecord::Schema.define(version: 20181124202809) do
   end
 
   create_table "offer_units_prices", force: :cascade do |t|
-    t.integer  "needed_amount"
     t.decimal  "fixed_price"
     t.integer  "offer_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.index ["offer_id"], name: "index_offer_units_prices_on_offer_id"
   end
 
@@ -86,6 +94,7 @@ ActiveRecord::Schema.define(version: 20181124202809) do
   create_table "products_shopping_carts", id: false, force: :cascade do |t|
     t.integer "product_id",       null: false
     t.integer "shopping_cart_id", null: false
+    t.integer "product_quantity"
     t.index ["shopping_cart_id", "product_id"], name: "shopping_cart_on_product_id"
   end
 

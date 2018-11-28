@@ -2,14 +2,15 @@
 #
 # Table name: products
 #
-#  sku                :string           not null
+#  sku                :string           not null, primary key
 #  name               :string
-#  type               :string
+#  category           :string
 #  price              :decimal(, )
 #  brand              :string
 #  stock              :integer
 #  meassure_type      :string
 #  weight             :decimal(, )
+#  weight_unit        :string
 #  description        :string
 #  content_manager_id :integer
 #  created_at         :datetime         not null
