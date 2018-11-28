@@ -1,0 +1,20 @@
+# == Schema Information
+#
+# Table name: offer_units_prices
+#
+#  id          :integer          not null, primary key
+#  fixed_price :decimal(, )
+#  offer_id    :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  needed_amount: 1
+  fixed_price: 9.99
+
+two:
+  needed_amount: 1
+  fixed_price: 9.99
