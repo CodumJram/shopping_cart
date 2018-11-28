@@ -9,5 +9,5 @@
 #
 
 class OfferTotal < ApplicationRecord
-    belongs_to :offers
+    belongs_to :offer
 end

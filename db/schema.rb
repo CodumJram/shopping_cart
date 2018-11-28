@@ -24,29 +24,29 @@ ActiveRecord::Schema.define(version: 20181124202809) do
 
   create_table "offer_get_products", force: :cascade do |t|
     t.integer  "free_quantity"
-    t.integer  "products_id"
-    t.integer  "offers_id"
+    t.integer  "product_id"
+    t.integer  "offer_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.index ["offers_id"], name: "index_offer_get_products_on_offers_id"
-    t.index ["products_id"], name: "index_offer_get_products_on_products_id"
+    t.index ["offer_id"], name: "index_offer_get_products_on_offer_id"
+    t.index ["product_id"], name: "index_offer_get_products_on_product_id"
   end
 
   create_table "offer_totals", force: :cascade do |t|
     t.decimal  "percentage_discount"
-    t.integer  "offers_id"
+    t.integer  "offer_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
-    t.index ["offers_id"], name: "index_offer_totals_on_offers_id"
+    t.index ["offer_id"], name: "index_offer_totals_on_offer_id"
   end
 
   create_table "offer_units_prices", force: :cascade do |t|
     t.integer  "needed_amount"
     t.decimal  "fixed_price"
-    t.integer  "offers_id"
+    t.integer  "offer_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.index ["offers_id"], name: "index_offer_units_prices_on_offers_id"
+    t.index ["offer_id"], name: "index_offer_units_prices_on_offer_id"
   end
 
   create_table "offers", force: :cascade do |t|
@@ -55,18 +55,18 @@ ActiveRecord::Schema.define(version: 20181124202809) do
     t.datetime "end"
     t.string   "product_quantity"
     t.string   "description"
-    t.integer  "content_managers_id"
-    t.integer  "products_id"
-    t.integer  "shopping_carts_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-    t.index ["content_managers_id"], name: "index_offers_on_content_managers_id"
-    t.index ["products_id"], name: "index_offers_on_products_id"
-    t.index ["shopping_carts_id"], name: "index_offers_on_shopping_carts_id"
+    t.integer  "content_manager_id"
+    t.integer  "product_id"
+    t.integer  "shopping_cart_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["content_manager_id"], name: "index_offers_on_content_manager_id"
+    t.index ["product_id"], name: "index_offers_on_product_id"
+    t.index ["shopping_cart_id"], name: "index_offers_on_shopping_cart_id"
   end
 
   create_table "products", id: false, force: :cascade do |t|
-    t.string   "sku",                 null: false
+    t.string   "sku",                null: false
     t.string   "name"
     t.string   "category"
     t.decimal  "price"
@@ -76,10 +76,10 @@ ActiveRecord::Schema.define(version: 20181124202809) do
     t.decimal  "weight"
     t.string   "weight_unit"
     t.string   "description"
-    t.integer  "content_managers_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-    t.index ["content_managers_id"], name: "index_products_on_content_managers_id"
+    t.integer  "content_manager_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["content_manager_id"], name: "index_products_on_content_manager_id"
     t.index ["sku"], name: "index_products_on_sku", unique: true
   end
 

@@ -15,7 +15,6 @@ class ContentManagersController < ApplicationController
         
         if content_manager.save
             render json: content_manager, status: 201
-        
         else
             render json: content_manager.errors, status: :unprocessable_entity
         end

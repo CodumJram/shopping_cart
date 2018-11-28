@@ -24,8 +24,12 @@ class ProductsController < ApplicationController
     def destroy
         content_manager = ContentManager.find(params[:content_manager_id])
         product = content_manager.products.find(params[:id])
-        product.destroy
+
+        if product.destroy
             render json: product, status: 200
+        else 
+            render json: product.errors, status: :unprocessable_entity
+        end
     end
 
     def update

@@ -14,10 +14,10 @@
 #
 
 class Offer < ApplicationRecord
-  belongs_to :content_managers
-  belongs_to :products
-  belongs_to :shopping_carts
-  
+  belongs_to :content_manager
+  belongs_to :product, optional: true
+  belongs_to :shopping_cart, optional: true
+
   has_many :offer_get_products
   has_many :offer_totals
   has_many :offer_units_prices

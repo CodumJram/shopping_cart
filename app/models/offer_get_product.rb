@@ -10,6 +10,6 @@
 #
 
 class OfferGetProduct < ApplicationRecord
-  belongs_to :products
-  belongs_to :offers
+  belongs_to :product
+  belongs_to :offer
 end

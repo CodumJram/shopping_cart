@@ -10,5 +10,5 @@
 #
 
 class OfferUnitsPrice < ApplicationRecord
-    belongs_to :offers
+    belongs_to :offer
 end
