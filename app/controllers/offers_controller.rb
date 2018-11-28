@@ -13,14 +13,14 @@ class OffersController < ApplicationController
     def for_product_or_shopping_cart
         
         product = Product.find_by(sku: params[:product_id])
-        shopping_cart = ShoppingCart.find_by(id: params[:shopping_cart_id])
+        shopping_cart = ShoppingCart.find_by(id: session[:shopping_cart])
         
         if product
             return product
         elsif shopping_cart
             return shopping_cart
         else
-            raise "error"
+            raise "error didnt find a product or a shopping cart with the given id"
         end
     end
 

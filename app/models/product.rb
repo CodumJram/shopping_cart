@@ -22,5 +22,6 @@ class Product < ApplicationRecord
 
   belongs_to :content_manager
   has_many :offers
-  has_and_belongs_to_many :shopping_carts
+  has_many :products_shopping_carts
+  has_many :shopping_carts, :through => :products_shopping_carts
 end

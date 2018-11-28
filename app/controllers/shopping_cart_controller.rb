@@ -1,5 +1,7 @@
 class ShoppingCartController < ApplicationController
 
+    before_action :authorize_session, only: [:show, :destroy, :update]
+    
     def index
         @shopping_carts = ShoppingCart.all
         render json: @shopping_carts

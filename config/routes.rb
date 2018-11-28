@@ -106,7 +106,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'products/:product_id/shopping_cart/:cart_id/add_product' => 'shopping_cart_products#add_product'
+  post 'products/:product_id/shopping_cart/:shopping_cart_id/add_product' => 'shopping_cart_products#add_product'
   resources :products do
     resources :offers
     resources :shopping_cart do
