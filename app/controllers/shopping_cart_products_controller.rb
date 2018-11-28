@@ -1,5 +1,17 @@
 class ShoppingCartProductsController < ApplicationController
 
+    before_action :authorize_session, only: [:add_product, :index, :destroy, :update]
+
+    def authorize_session
+        @shopping_cart = ShoppingCart.find_by(id: session[:shopping_cart])
+        if @shopping_cart
+            render json: "authenticated", status: 200
+        else
+            render json: "access-forbidden", status: 403
+            redirect_to "home#index"
+        end
+    end
+
     def index
         @shopping_cart_products = ProductsShoppingCart.all
         render json: @shopping_cart_products
