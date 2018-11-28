@@ -1,24 +1,20 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Shopping cart RESTful application without login for normal users
 
-Things you may want to cover:
+ruby version: 2.3.5
+database: sqlite3
 
-* Ruby version
+things implemented by now:
 
-* System dependencies
+    - model
+    - sessions for the shopping cart
+    - controllers
+    - routes
 
-* Configuration
+still missing:
+    - queries
+    - content manager login
 
-* Database creation
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Done by: Jose Manuel Ramirez - jmramirezr7@gmail.com
