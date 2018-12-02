@@ -41,7 +41,6 @@ class ContentManagersController < ApplicationController
     end
 
     def params_content_manager
-
         params.require(:content_manager).permit(:first_name, :last_name,
              :phone, :email, :password_digest)
     end
