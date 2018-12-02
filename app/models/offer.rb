@@ -20,7 +20,7 @@ class Offer < ApplicationRecord
   belongs_to :product, optional: true
   belongs_to :shopping_cart, optional: true
 
-  has_one :conditions
+  has_one :condition
   has_many :offer_get_products
   has_many :offer_totals
   has_many :offer_units_prices

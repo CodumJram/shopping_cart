@@ -42,6 +42,7 @@ class ShoppingCartController < ApplicationController
         end
     end
 
+    private
     def params_cart
         params.permit(:session)
     end
