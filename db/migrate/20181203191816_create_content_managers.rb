@@ -9,5 +9,6 @@ class CreateContentManagers < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
+    add_index :content_managers, :email, unique: true
   end
 end

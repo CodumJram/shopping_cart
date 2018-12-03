@@ -1,0 +1,2 @@
+module SessionContentManagersHelper
+end

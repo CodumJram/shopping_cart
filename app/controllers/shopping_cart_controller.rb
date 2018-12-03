@@ -1,6 +1,6 @@
 class ShoppingCartController < ApplicationController
 
-    before_action :authorize_session, only: [:show, :destroy, :update]
+    before_action :authorize_session_cart, only: [:show, :destroy, :update]
     
     def index
         @shopping_carts = ShoppingCart.all
@@ -25,10 +25,12 @@ class ShoppingCartController < ApplicationController
         
         shopping_cart_destroy = @shopping_cart.destroy
         action_validation(shopping_cart_destroy, @shopping_cart, ok_status)
+        session[:shopping_cart] = nil
     end
 
     private
-    def params_cart
-        params.permit()
-    end
+        # Only allow the white list parameters.
+        def params_cart
+            params.permit()
+        end
 end

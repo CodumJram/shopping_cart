@@ -37,7 +37,8 @@ class OfferTotalsController < ApplicationController
     end
     
     private
-    def params_offer_total
-        params.permit(:percentage_discount)
-    end    
+        # Only allow the white list parameters.
+        def params_offer_total
+            params.permit(:percentage_discount)
+        end    
 end

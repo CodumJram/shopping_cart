@@ -46,7 +46,8 @@ class OfferGetProductsController < ApplicationController
     end
     
     private
-    def params_offer_get_product
-        params.permit(:free_quantity, :free_product_id)
-    end    
+        # Only allow the white list parameters.
+        def params_offer_get_product
+            params.permit(:free_quantity, :free_product_id)
+        end    
 end

@@ -35,8 +35,9 @@ class ProductsController < ApplicationController
     end
 
     private
-    def params_product
-        params.require(:product).permit(:sku, :name, :category, :price,
-                        :brand, :stock, :meassure_type, :weight, :description)
-    end
+        # Only allow the white list parameters.
+        def params_product
+            params.require(:product).permit(:sku, :name, :category, :price,
+                            :brand, :stock, :meassure_type, :weight, :description)
+        end
 end

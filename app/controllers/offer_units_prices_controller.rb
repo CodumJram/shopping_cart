@@ -42,7 +42,8 @@ class OfferUnitsPricesController < ApplicationController
     end
     
     private
-    def params_offer_units_price
-        params.permit(:fixed_price)
-    end    
+        # Only allow the white list parameters.
+        def params_offer_units_price
+            params.permit(:fixed_price)
+        end    
 end

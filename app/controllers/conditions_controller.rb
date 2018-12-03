@@ -36,8 +36,9 @@ class ConditionsController < ApplicationController
         action_validation(condition_update, @condition, created_status)
     end
     
-    private 
-    def params_condition
-        params.permit(:needed_money_spent, :needed_stock, :offer_id)
-    end
+    private
+        # Only allow the white list parameters.
+        def params_condition
+            params.permit(:needed_money_spent, :needed_stock, :offer_id)
+        end
 end

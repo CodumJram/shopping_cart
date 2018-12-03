@@ -1,5 +1,6 @@
 class ContentManagersController < ApplicationController
-    
+    before_action :set_content_manager, only: [:show, :edit, :update, :destroy]
+
     def index 
         @content_managers = ContentManager.all
         render json: @content_managers, status: ok_status
@@ -34,10 +35,12 @@ class ContentManagersController < ApplicationController
         action_validation(content_manager_update, @content_manager,
                                                             ok_status)
     end
+    
 
     private
-    def params_content_manager
-        params.require(:content_manager).permit(:first_name, :last_name, 
-                                            :phone, :email, :password_digest)
-    end
+        # Only allow the white list parameters.
+        def params_content_manager
+            params.require(:content_manager).permit(:first_name, :last_name,
+                            :phone, :email, :password, :password_confirmation)
+        end
 end

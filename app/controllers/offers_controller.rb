@@ -35,21 +35,23 @@ class OffersController < ApplicationController
     end
 
     private
-    def for_product_or_shopping_cart        
-        product = Product.find_by(sku: params[:product_id])
-        shopping_cart = ShoppingCart.find_by(id: params[:shopping_cart_id])
-        
-        if product
-            return product
-        elsif shopping_cart
-            return shopping_cart
-        else
-            raise "ERROR: given id not found"
+        # returns product or shopping cart deppending on the url
+        def for_product_or_shopping_cart        
+            product = Product.find_by(sku: params[:product_id])
+            shopping_cart = ShoppingCart.find_by(id: params[:shopping_cart_id])
+            
+            if product
+                return product
+            elsif shopping_cart
+                return shopping_cart
+            else
+                raise "ERROR: given id not found"
+            end
         end
-    end
-
-    def params_offer
-        params.permit(:name, :start, :end, :product_quantity, :description,
-                                                         :content_manager_id)
-    end
+        
+        # Only allow the white list parameters.        
+        def params_offer
+            params.permit(:name, :start, :end, :product_quantity, :description,
+                                                            :content_manager_id)
+        end
 end

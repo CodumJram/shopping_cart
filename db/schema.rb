@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181128035533) do
+ActiveRecord::Schema.define(version: 20181203191816) do
 
   create_table "conditions", force: :cascade do |t|
     t.integer  "needed_stock"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20181128035533) do
     t.string   "password_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.index ["email"], name: "index_content_managers_on_email", unique: true
   end
 
   create_table "offer_get_products", force: :cascade do |t|

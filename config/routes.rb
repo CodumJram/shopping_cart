@@ -95,6 +95,14 @@ Rails.application.routes.draw do
   
   root 'home#index'
   
+  #routes for the content manager to sign up, login and logout
+  resources :sessions, only: [:new, :create, :destroy]
+
+  post 'signup', to: 'content_managers#create', as: 'signup'
+  post 'login', to: 'session_content_managers#create', as: 'login'
+  get 'logout', to: 'session_content_managers#destroy', as: 'logout'
+
+  #routes for the content manager creation of products and offers
   resources :content_managers do
     resources :products do
       resources :offers do
@@ -106,6 +114,7 @@ Rails.application.routes.draw do
     end
   end
 
+  #routes for the user to see products, offers and use the shopping cart
   post 'products/:product_id/shopping_cart/:shopping_cart_id/add_product' => 'shopping_cart_products#add_product'
   resources :products do
     resources :offers
@@ -113,5 +122,4 @@ Rails.application.routes.draw do
       resources :shopping_cart_products
     end
   end
-
 end
