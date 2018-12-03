@@ -4,12 +4,12 @@ class ShoppingCartController < ApplicationController
     
     def index
         @shopping_carts = ShoppingCart.all
-        render json: @shopping_carts
+        render json: @shopping_carts, status: ok_status
     end
 
     def show 
         @shopping_cart = ShoppingCart.find_by_id(session[:shopping_cart])
-        render json: @shopping_cart
+        render json: @shopping_cart, status: ok_status
     end
 
     def create
@@ -29,6 +29,6 @@ class ShoppingCartController < ApplicationController
 
     private
     def params_cart
-        params.permit(:session)
+        params.permit()
     end
 end

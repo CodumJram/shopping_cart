@@ -1,8 +1,8 @@
 class OffersController < ApplicationController
 
     def index
-        offers = Offer.all
-        render json: offers , status: ok_status
+        @offers = Offer.all
+        render json: @offers , status: ok_status
     end
 
     def show

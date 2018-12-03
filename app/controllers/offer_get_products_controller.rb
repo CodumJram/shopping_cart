@@ -1,13 +1,15 @@
 class OfferGetProductsController < ApplicationController
     
     def index
-        @offer_get_products = OfferGetProduct.all
-        render json: @offer_get_products , status: 200
+        @offer = Offer.find(params[:offer_id])
+        @offer_get_products = @offer.offer_get_products
+        render json: @offer_get_products , status: ok_status
     end
 
     def show
-        @offer_get_product = OfferGetProduct.find(params[:id])
-        render json: @offer_get_product, status: 200
+        @offer = Offer.find(params[:offer_id])
+        @offer_get_product = @offer.offer_get_products.find(params[:id])
+        render json: @offer_get_product, status: ok_status
     end
 
     def create
