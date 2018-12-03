@@ -29,7 +29,8 @@ class ContentManagersController < ApplicationController
     def update
         @content_manager = ContentManager.find(params[:id])
         
-        content_manager_update = @content_manager.update
+        content_manager_update = @content_manager.update(
+                                                params_content_manager)
         action_validation(content_manager_update, @content_manager,
                                                             ok_status)
     end

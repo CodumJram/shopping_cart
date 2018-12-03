@@ -37,7 +37,8 @@ class OfferGetProductsController < ApplicationController
         @offer = Offer.find(params[:offer_id])
         @offer_get_product = @offer.offer_get_products.find(params[:id])
 
-        offer_get_product_update = @offer_get_product.update
+        offer_get_product_update = @offer_get_product.update(
+                                                params_offer_get_product)
         action_validation(offer_get_product_update, @offer_get_product, 
                                                                 ok_status)  
     end

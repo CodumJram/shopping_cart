@@ -1,6 +1,6 @@
 class ShoppingCartController < ApplicationController
 
-    #before_action :authorize_session, only: [:show, :destroy, :update]
+    before_action :authorize_session, only: [:show, :destroy, :update]
     
     def index
         @shopping_carts = ShoppingCart.all
@@ -8,7 +8,7 @@ class ShoppingCartController < ApplicationController
     end
 
     def show 
-        @shopping_cart = ShoppingCart.find_by(id: session[:shopping_cart])
+        @shopping_cart = ShoppingCart.find_by_id(session[:shopping_cart])
         render json: @shopping_cart
     end
 
@@ -17,20 +17,14 @@ class ShoppingCartController < ApplicationController
         
         shopping_cart_save = @shopping_cart.save
         action_validation(shopping_cart_save, @shopping_cart, created_status)
+        session[:shopping_cart] = @shopping_cart.id
     end
 
     def destroy
-        @shopping_cart = ShoppingCart.find_by(id: session[:shopping_cart])
-        render json: destroy
-        #shopping_cart_destroy = @shopping_cart.destroy
-        #action_validation(shopping_cart_destroy, @shopping_cart, ok_status)
-    end
-
-    def update
-        @shopping_cart = ShoppingCart.find_by(id: session[:shopping_cart])
+        @shopping_cart = ShoppingCart.find_by_id(session[:shopping_cart])
         
-        shopping_cart_update = @shopping_cart.update
-        action_validation(shopping_cart_update, @shopping_cart, ok_status)
+        shopping_cart_destroy = @shopping_cart.destroy
+        action_validation(shopping_cart_destroy, @shopping_cart, ok_status)
     end
 
     private

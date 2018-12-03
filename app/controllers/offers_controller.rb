@@ -23,15 +23,15 @@ class OffersController < ApplicationController
         @offer = @destroy_for.offers.find(params[:id])
         
         offer_destroy = @offer.destroy
-        action_validation(offer_save, @offer, ok_status)
+        action_validation(offer_destroy, @offer, ok_status)
     end
 
     def update
         @update_for = for_product_or_shopping_cart
         @offer = @update_for.offers.find(params[:id])
         
-        offer_update = @offer.update
-        action_validation(offer_save, @offer, ok_status)
+        offer_update = @offer.update(params_offer)
+        action_validation(offer_update, @offer, ok_status)
     end
 
     private
