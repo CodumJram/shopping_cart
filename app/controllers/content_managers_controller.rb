@@ -2,47 +2,41 @@ class ContentManagersController < ApplicationController
     
     def index 
         @content_managers = ContentManager.all
-        render json: @content_managers, status: 200
+        render json: @content_managers, status: ok_status
     end
 
     def show
         @content_manager = ContentManager.find(params[:id])
-        render json: @content_manager, status: 200
+        render json: @content_manager, status: ok_status
     end
 
     def create
         @content_manager = ContentManager.new(params_content_manager)
         
-        if @content_manager.save
-            render json: @content_manager, status: 201
-        else
-            render json: @content_manager.errors, status: :unprocessable_entity
-        end
+        content_manager_save = @content_manager.save
+        action_validation(content_manager_save, @content_manager,
+                                                    created_status)
     end
 
     def destroy
         @content_manager = ContentManager.find(params[:id])
-
-        if @content_manager.destroy
-            render json: @content_manager, status: 200
-        else 
-            render json: @content_manager.errors, status: :unprocessable_entity
-        end
+        
+        content_manager_destroy = @content_manager.destroy
+        action_validation(content_manager_destroy, @content_manager,
+                                                            ok_status)
     end
 
     def update
         @content_manager = ContentManager.find(params[:id])
-
-        if @content_manager.update(params_content_manager)
-            render json: @content_manager, status: 200 
-        else
-            render json: @content_manager.errors, status: :unprocessable_entity
-        end
+        
+        content_manager_update = @content_manager.update
+        action_validation(content_manager_update, @content_manager,
+                                                            ok_status)
     end
 
     private
     def params_content_manager
-        params.permit(:first_name, :last_name,
-             :phone, :email, :password_digest)
+        params.require(:content_manager).permit(:first_name, :last_name, 
+                                            :phone, :email, :password_digest)
     end
 end

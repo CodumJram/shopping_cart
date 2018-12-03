@@ -1,5 +1,5 @@
 class OfferGetProductsController < ApplicationController
-
+    
     def index
         @offer_get_products = OfferGetProduct.all
         render json: @offer_get_products , status: 200
@@ -11,40 +11,39 @@ class OfferGetProductsController < ApplicationController
     end
 
     def create
-        @offer = Offer.find(params[:offer_id])
-        @offer_get_product = @offer.offer_get_products.new(params_offer_get_product)
+        #checks if the free product exists
+        @free_product_id = params_offer_get_product[:free_product_id]
+        @free_product = Product.find(@free_product_id)
 
-        if @offer_get_product.save 
-            render json: @offer_get_product, status: 201
-        else
-            render json: @offer_get_product.errors, status: :unprocessable_entity
-        end
+        @offer = Offer.find(params[:offer_id])
+        @offer_get_product = @offer.offer_get_products.new(
+                                                    params_offer_get_product)
+        
+        offer_get_product_save = @offer_get_product.save
+        action_validation(offer_get_product_save, @offer_get_product, 
+                                                        created_status)
     end
     
     def destroy
         @offer = Offer.find(params[:offer_id])
         @offer_get_product = @offer.offer_get_products.find(params[:id])
 
-        if @offer_get_product.destroy
-            render json: @offer_get_product, status: 200
-        else
-            render json: @offer_get_product.errors, status: :unprocessable_entity
-        end
+        offer_get_product_destroy = @offer_get_product.destroy
+        action_validation(offer_get_product_destroy, @offer_get_product, 
+                                                                ok_status)
     end
 
     def update
         @offer = Offer.find(params[:offer_id])
         @offer_get_product = @offer.offer_get_products.find(params[:id])
 
-        if @offer_get_product.update(params_offer_get_product)
-            render json: @offer_get_product, status: 200
-        else
-            render json: @offer_get_product.errors, status: 422
-        end
+        offer_get_product_update = @offer_get_product.update
+        action_validation(offer_get_product_update, @offer_get_product, 
+                                                                ok_status)  
     end
     
     private
     def params_offer_get_product
-        params.permit(:free_quantity, :product_id, :offer_get_product_id)
+        params.permit(:free_quantity, :free_product_id)
     end    
 end

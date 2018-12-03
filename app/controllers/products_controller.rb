@@ -13,39 +13,30 @@ class ProductsController < ApplicationController
     def create
         @content_manager = ContentManager.find(params[:content_manager_id])
         @product = @content_manager.products.new(params_product)
-
-        if @product.save 
-            render json: @product, status: 201
-        else
-            render json: @product.errors, status: :unprocessable_entity
-        end
+        
+        product_save = @product.save
+        action_validation(product_save, @product, created_status)
     end
 
     def destroy
         @content_manager = ContentManager.find(params[:content_manager_id])
         @product = @content_manager.products.find(params[:id])
-
-        if @product.destroy
-            render json: @product, status: 200
-        else 
-            render json: @product.errors, status: :unprocessable_entity
-        end
+        
+        product_destroy = @product.destroy
+        action_validation(product_destroy, @product, ok_status)
     end
 
     def update
         @content_manager = ContentManager.find(params[:content_manager_id])
         @product = @content_manager.products.find(params[:id])
         
-        if @product.update(params_product)
-            render json: @product, status: 200
-        else
-            render json: @product.errors, status: 422
-        end
+        product_update = @product.update
+        action_validation(product_update, @product, ok_status)
     end
 
     private
     def params_product
-        params.permit(:sku, :name, :category, :price, :brand, :stock,
-             :meassure_type, :weight, :description, :content_manager_id)
+        params.require(:product).permit(:sku, :name, :category, :price,
+                        :brand, :stock, :meassure_type, :weight, :description)
     end
 end

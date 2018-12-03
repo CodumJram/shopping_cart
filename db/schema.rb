@@ -33,12 +33,11 @@ ActiveRecord::Schema.define(version: 20181128035533) do
 
   create_table "offer_get_products", force: :cascade do |t|
     t.integer  "free_quantity"
-    t.integer  "product_id"
+    t.integer  "free_product_id", null: false
     t.integer  "offer_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.index ["offer_id"], name: "index_offer_get_products_on_offer_id"
-    t.index ["product_id"], name: "index_offer_get_products_on_product_id"
   end
 
   create_table "offer_totals", force: :cascade do |t|

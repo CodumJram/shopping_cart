@@ -2,45 +2,36 @@ class OffersController < ApplicationController
 
     def index
         offers = Offer.all
-        render json: offers , status: 200
+        render json: offers , status: ok_status
     end
 
     def show
         @offer = Offer.find(params[:id])
-        render json: @offer, status: 200
+        render json: @offer, status: ok_status
     end
 
     def create
         @create_for = for_product_or_shopping_cart
         @offer = @create_for.offers.new(params_offer)
-
-        if @offer.save 
-            render json: @offer, status: 201
-        else
-            render json: @offer.errors, status: :unprocessable_entity
-        end
+        
+        offer_save = @offer.save
+        action_validation(offer_save, @offer, created_status)
     end
     
     def destroy
         @destroy_for = for_product_or_shopping_cart
         @offer = @destroy_for.offers.find(params[:id])
-
-        if @offer.destroy
-            render json: @offer, status: 200
-        else
-            render json: @offer.errors, status: :unprocessable_entity
-        end
+        
+        offer_destroy = @offer.destroy
+        action_validation(offer_save, @offer, ok_status)
     end
 
     def update
         @update_for = for_product_or_shopping_cart
         @offer = @update_for.offers.find(params[:id])
-
-        if @offer.update(params_offer)
-            render json: @offer, status: 200
-        else
-            render json: @offer.errors, status: 422
-        end
+        
+        offer_update = @offer.update
+        action_validation(offer_save, @offer, ok_status)
     end
 
     private
@@ -53,12 +44,12 @@ class OffersController < ApplicationController
         elsif shopping_cart
             return shopping_cart
         else
-            raise "error"
+            raise "ERROR: given id not found"
         end
     end
 
     def params_offer
-        params.permit(:name, :start, :end, :product_quantity,
-             :description, :content_manager_id, :product_id, :shopping_cart_id)
+        params.permit(:name, :start, :end, :product_quantity, :description,
+                                                         :content_manager_id)
     end
 end

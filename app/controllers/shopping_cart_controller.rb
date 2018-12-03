@@ -1,6 +1,6 @@
 class ShoppingCartController < ApplicationController
 
-    before_action :authorize_session, only: [:show, :destroy, :update]
+    #before_action :authorize_session, only: [:show, :destroy, :update]
     
     def index
         @shopping_carts = ShoppingCart.all
@@ -14,34 +14,23 @@ class ShoppingCartController < ApplicationController
 
     def create
         @shopping_cart = ShoppingCart.new(params_cart)
-
-        if @shopping_cart.save 
-            session[:shopping_cart] = @shopping_cart.id
-            render json: {shopping_cart: @shopping_cart,
-                            session: session}, status: 201
-        else
-            render json: @shopping_cart.errors, status: :unprocessable_entity
-        end
+        
+        shopping_cart_save = @shopping_cart.save
+        action_validation(shopping_cart_save, @shopping_cart, created_status)
     end
 
     def destroy
         @shopping_cart = ShoppingCart.find_by(id: session[:shopping_cart])
-        
-        if @shopping_cart.destroy
-            render json: @shopping_cart, status: 200
-        else 
-            render json: @shopping_cart.errors, status: :unprocessable_entity
-        end
+        render json: destroy
+        #shopping_cart_destroy = @shopping_cart.destroy
+        #action_validation(shopping_cart_destroy, @shopping_cart, ok_status)
     end
 
     def update
         @shopping_cart = ShoppingCart.find_by(id: session[:shopping_cart])
         
-        if @shopping_cart.update(params_product)
-            render json: @shopping_cart, status: 200
-        else
-            render json: @shopping_cart.errors, status: 422
-        end
+        shopping_cart_update = @shopping_cart.update
+        action_validation(shopping_cart_update, @shopping_cart, ok_status)
     end
 
     private
